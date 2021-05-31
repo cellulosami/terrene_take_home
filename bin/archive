@@ -1,0 +1,1 @@
+git archive --output=./terrene_takehome.zip --format=zip HEAD --prefix=terrene_takehome/
