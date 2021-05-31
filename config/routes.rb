@@ -1,5 +1,6 @@
 # config/routes.rb
 Rails.application.routes.draw do
+  get 'todos/:todo_id/items(/:page)', to: 'items#index'
   resources :todos do
     resources :items, shallow: true
   end
