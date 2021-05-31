@@ -4,22 +4,23 @@ require 'rails_helper'
 RSpec.describe 'Items API', type: :request do
   let(:user) { create(:user) }
   let!(:todo) { create(:todo, created_by: user.id) }
-  let!(:items) { create_list(:item, 20, todo_id: todo.id) }
+  let!(:items) { create_list(:item, 24, todo_id: todo.id) }
   let(:todo_id) { todo.id }
   let(:id) { items.first.id }
   let(:headers) { valid_headers }
+  let(:page) { 1 }
 
   # Test suite for GET /todos/:todo_id/items
-  describe 'GET /todos/:todo_id/items' do
-    before { get "/todos/#{todo_id}/items", headers: headers }
+  describe 'GET /todos/:todo_id/items/:page' do
+    before { get "/todos/#{todo_id}/items/#{page}", headers: headers }
 
     context 'when todo exists' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
 
-      it 'returns all todo items' do
-        expect(json.size).to eq(20)
+      it 'returns all todo items from page one' do
+        expect(json.size).to eq(10)
       end
     end
 
@@ -32,6 +33,14 @@ RSpec.describe 'Items API', type: :request do
 
       it 'returns a not found message' do
         expect(response.body).to match(/Couldn't find Todo/)
+      end
+    end
+
+    context 'when on the final page' do
+      let(:page) { 3 }
+
+      it 'returns all todo items from the final page' do
+        expect(json.size).to eq(4)
       end
     end
   end

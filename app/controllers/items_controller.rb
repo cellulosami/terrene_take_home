@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
     before_action :set_todo, only: [:index, :create]
     before_action :set_item, only: [:show, :update, :destroy]
   
-    # GET /todos/:todo_id/items/page
+    # GET /todos/:todo_id/items/:page
     def index
       #defaults to page 1 if there is no page or if the page is out of range
       unless params[:page] && @todo.items.page(params[:page]).per(10).out_of_range? == false
