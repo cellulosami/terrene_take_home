@@ -45,11 +45,11 @@ RSpec.describe 'Items API', type: :request do
     end
   end
 
-  # Test suite for GET /todos/:todo_id/items/:id
-  describe 'GET /todos/:todo_id/items/:id' do
-    before { get "/todos/#{todo_id}/items/#{id}", headers: headers }
+  # Test suite for GET /items/:id
+  describe 'GET /items/:id' do
+    before { get "/items/#{id}", headers: headers }
 
-    context 'when todo item exists' do
+    context 'when item exists' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
@@ -59,7 +59,7 @@ RSpec.describe 'Items API', type: :request do
       end
     end
 
-    context 'when todo item does not exist' do
+    context 'when item does not exist' do
       let(:id) { 0 }
 
       it 'returns status code 404' do
@@ -72,7 +72,7 @@ RSpec.describe 'Items API', type: :request do
     end
   end
 
-  # Test suite for PUT /todos/:todo_id/items
+  # Test suite for POST /todos/:todo_id/items
   describe 'POST /todos/:todo_id/items' do
     let(:valid_attributes) { { name: 'Visit Narnia', done: false }.to_json }
 
@@ -97,11 +97,11 @@ RSpec.describe 'Items API', type: :request do
     end
   end
 
-  # Test suite for PUT /todos/:todo_id/items/:id
-  describe 'PUT /todos/:todo_id/items/:id' do
+  # Test suite for PUT /items/:id
+  describe 'PUT /items/:id' do
     let(:valid_attributes) { { name: 'Mozart' }.to_json }
 
-    before { put "/todos/#{todo_id}/items/#{id}", params: valid_attributes, headers: headers }
+    before { put "/items/#{id}", params: valid_attributes, headers: headers }
 
     context 'when item exists' do
       it 'returns status code 204' do
