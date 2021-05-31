@@ -127,9 +127,9 @@ RSpec.describe 'Items API', type: :request do
     end
   end
 
-  # Test suite for DELETE /todos/:id
-  describe 'DELETE /todos/:id' do
-    before { delete "/todos/#{todo_id}/items/#{id}", headers: headers }
+  # Test suite for DELETE /items/:id
+  describe 'DELETE /items/:id' do
+    before { delete "/items/#{id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

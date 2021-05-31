@@ -19,11 +19,13 @@ class UsersController < ApplicationController
           created_at: user.created_at,
           updated_at: user.updated_at,
         }
+        status = :ok
       else
         response = { message: Message.unauthorized }
+        status = :unauthorized
       end
       
-      json_response(response)
+      json_response(response, status)
     end
   
     private
